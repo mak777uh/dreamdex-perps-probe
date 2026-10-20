@@ -1,0 +1,95 @@
+dreamDEX perps probe — 2026-10-20 11:37:12Z
+REST  https://stg.api.dreamdex.io/v0
+WS    wss://stg.api.dreamdex.io/v0/ws/public
+IDX   https://hideki-dev.smk.somnia.host/v1/graphql
+
+==============================================================================
+1. REST /markets
+==============================================================================
+GET /markets -> 200 | markets: 3
+  SOMI:USDso     kind=spot   tick=0.0001    lot=0.01      minQty=1
+  WBTC:USDso     kind=spot   tick=0.1       lot=0.00001   minQty=0.0001
+  WETH:USDso     kind=spot   tick=0.01      lot=0.0001    minQty=0.001
+  distinct kind: ['spot']
+
+==============================================================================
+2. REST /tickers
+==============================================================================
+GET /tickers -> 200 | entries: 3
+  WBTC:USDso     open=81535.3    close=81380.8    high=81801.7    low=81245.7    vol=0.29253
+                 lastTradeAt=1792496234469 snapshotAt=1792496235207
+  WETH:USDso     open=2390.19    close=2380.14    high=2399.49    low=2376.21    vol=2.6021
+                 lastTradeAt=1792496232869 snapshotAt=1792496235233
+  SOMI:USDso     open=0.1852     close=0.187      high=0.1874     low=0.1849     vol=49500
+                 lastTradeAt=1792496231769 snapshotAt=1792496235255
+
+==============================================================================
+3. REST /orderbooks
+==============================================================================
+GET /orderbooks?symbols=WBTC:USDso&depth=5 -> 200
+  bids: [('81364.4', '0.00141'), ('81323.7', '0.00172'), ('81283', '0.00202')]
+  asks: [('81380.8', '0.0012'), ('81421.5', '0.00167'), ('81462.1', '0.00197')]
+  spread: 16.400000 (0.0202%)
+
+==============================================================================
+4. REST /markets/{symbol}/volume
+==============================================================================
+GET /markets/WBTC:USDso/volume -> 200
+  baseVolume=8.48962 raw=848962000
+  quoteVolume=695822.442599 raw=695822442599000000000000
+  since=1791889636591 until=1792494436591
+  window=604800000 ms
+
+==============================================================================
+5. WebSocket public feed
+==============================================================================
+getMarkets -> {"id":1,"status":200,"payload":{"markets":[{"base":"0x4e85DC48a70DA1298489d5B6FC2492767d98f384","baseDecimals":8,"contract":"0x3605f28aA7C50e7441211e77Cb0762d49539326C","kind":"spo
+subscribe  -> {"channel":"orderbook","type":"subscribed","symbols":["WBTC:USDso"]}
+
+==============================================================================
+6. Indexer (Hideki) — market rows
+==============================================================================
+POST https://hideki-dev.smk.somnia.host/v1/graphql -> 200
+  id=0x00000000000000000000000000000000000000000000000000000000000000fa type=BINARY None/None mark=None markAt=None perpStatus=None
+  id=0x00000000000000000000000000000000000000000000000000000000000000fc type=BINARY None/None mark=None markAt=None perpStatus=None
+  id=0x000000000000000000000000000000000000000000000000000000000000015a type=BINARY None/None mark=None markAt=None perpStatus=None
+  id=0x00000000000000000000000000000000000000000000000000000000000021a9 type=BINARY None/None mark=None markAt=None perpStatus=None
+  id=0x0000000000000000000000000000000000000000000000000000000000000004 type=BINARY None/None mark=None markAt=None perpStatus=None
+  id=0x0000000000000000000000000000000000000000000000000000000000000095 type=BINARY None/None mark=None markAt=None perpStatus=None
+
+==============================================================================
+7. Chain and SDK
+==============================================================================
+eth_chainId -> 0xc4cf (50383)
+npm @somnia-chain/markets-sdk -> 0.32.1 (modified 2026-10-14T18:08:33.695Z)
+
+done — read-only: no keys, no signatures, no writes.
+{
+ "probed_at": "2026-10-20 11:37:12Z",
+ "markets": {
+  "count": 3,
+  "kinds": [
+   "spot"
+  ]
+ },
+ "tickers": 3,
+ "book": {
+  "bids": 5,
+  "asks": 5
+ },
+ "volume": [
+  "baseVolume",
+  "baseVolumeRaw",
+  "quoteVolume",
+  "quoteVolumeRaw",
+  "since",
+  "symbol",
+  "until"
+ ],
+ "ws": "ok",
+ "indexer": {
+  "rows": 6
+ },
+ "chain_id": 50383,
+ "sdk": "0.32.1"
+}

@@ -34,9 +34,9 @@ while the individual findings stay sealed until the bounty is judged.
 
 | Area | Major | Normal | Total |
 |---|---|---|---|
-| SDK (`@somnia-chain/markets-sdk` 0.32.1) | 2 | 1 | 3 |
-| API — REST `/v0`, WebSocket bridge, indexer | 4 | 7 | 11 |
-| Docs | 2 | 6 | 8 |
+| API — REST /v0, WebSocket bridge, indexer | 5 | 7 | 12 |
+| SDK (@somnia-chain/markets-sdk 0.32.1) | 2 | 1 | 3 |
+| Docs | 1 | 6 | 7 |
 | **Total** | **8** | **14** | **22** |
 
 The API row covers the public REST surface, the WebSocket REST-bridge and the Hideki indexer (the

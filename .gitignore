@@ -1,3 +1,6 @@
 publish_probe.py
 __pycache__/
 *.pyc
+check_*.py
+faucet_links.py
+publish_probe.py

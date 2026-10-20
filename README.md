@@ -32,12 +32,15 @@ while the individual findings stay sealed until the bounty is judged.
 
 **22 findings: 8 major, 14 normal.** Split by area:
 
-| Area | Major | Normal |
-|---|---|---|
-| SDK (`@somnia-chain/markets-sdk` 0.32.1) | 3 | 2 |
-| REST API (`/v0`) | 4 | 7 |
-| WebSocket REST-bridge | 1 | 1 |
-| Documentation / indexer | — | 4 |
+| Area | Major | Normal | Total |
+|---|---|---|---|
+| SDK (`@somnia-chain/markets-sdk` 0.32.1) | 2 | 1 | 3 |
+| API — REST `/v0`, WebSocket bridge, indexer | 4 | 7 | 11 |
+| Docs | 2 | 6 | 8 |
+| **Total** | **8** | **14** | **22** |
+
+The API row covers the public REST surface, the WebSocket REST-bridge and the Hideki indexer (the
+indexer-only items are two of the seven normal API findings).
 
 Each report in the private set contains the exact command, the captured response, the expected
 behaviour and why it matters — the same format this probe uses. Titles and reproduction steps are
